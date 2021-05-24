@@ -23,64 +23,76 @@ function ProductScreen({ match }) {
         Go Back
       </Link>
       <Row>
-        <Col md={6}>
+        {/* Image col */}
+        <Col md={7}>
           <Image src={product.image} alt={product.name} fluid />
         </Col>
+        {/* Cart and product detail col */}
+        <Col md={5}>
+          <Col>
+            <Card>
+              <ListGroup variant="flush">
+                <ListGroup.Item className="d-flex justify-content-between">
+                  <span>Price:</span>
+                  <span>${product.price}</span>
+                </ListGroup.Item>
 
-        <Col md={3}>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h3>{product.name}</h3>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-                color={"#f8e825"}
-              />
-            </ListGroup.Item>
-
-            <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-
-            <ListGroup.Item>{product.description}</ListGroup.Item>
-          </ListGroup>
-        </Col>
-
-        <Col md={3}>
-          <Card>
-            <ListGroup variant="flush">
-              <ListGroup.Item>
-                <Row>
-                  <Col>Price:</Col>
-                  <Col>
-                    <strong>${product.price}</strong>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Row>
-                  <Col>Status:</Col>
-                  <Col>
+                <ListGroup.Item className="d-flex justify-content-between">
+                  <span>Status:</span>
+                  <span>
                     {product.countInStock > 0 ? "In stock" : "Out of stock"}
-                  </Col>
-                </Row>
-              </ListGroup.Item>
+                  </span>
+                </ListGroup.Item>
 
-              <ListGroup.Item>
-                <Button
-                  className="btn-light"
-                  type="button"
-                  disabled={product.countInStock == 0}
-                >
-                  Add to Cart
-                </Button>
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
+                <ListGroup.Item className="d-flex flex-column">
+                  <Button
+                    className="btn-light"
+                    type="button"
+                    disabled={product.countInStock == 0}
+                  >
+                    Add to Cart
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+            <hr />
+          </Col>
+
+          <Col className="py-1">
+            <Card>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <Rating
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
+                    color={"#f8e825"}
+                  />
+                </ListGroup.Item>
+
+                <ListGroup.Item className="d-flex justify-content-between">
+                  <span>Brand:</span>
+                  <span>{product.brand}</span>
+                </ListGroup.Item>
+
+                <ListGroup.Item className="d-flex justify-content-between">
+                  <span>Price:</span>
+                  <span>${product.price}</span>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </Col>
         </Col>
       </Row>
+
+      <Card className="my-3">
+        <ListGroup variant="flush">
+          <ListGroup.Item>
+            <h2>{product.name}</h2>
+          </ListGroup.Item>
+
+          <ListGroup.Item>{product.description}</ListGroup.Item>
+        </ListGroup>
+      </Card>
     </div>
   );
 }
