@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Product(models.Model):
@@ -33,3 +33,23 @@ class Review(models.Model):
 
     def __str__(self) -> str:
         return str(self.rating)
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    payment_method = models.CharField(max_length=100, null=True, blank=True)
+    tax_price = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    shipping_price = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    total_price = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    is_paid = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)
+    paid_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    delivered_at = models.DateTimeField(
+        auto_now_add=True, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return str(self. created_at)
