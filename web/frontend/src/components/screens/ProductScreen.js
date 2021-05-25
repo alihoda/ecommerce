@@ -51,7 +51,9 @@ function ProductScreen({ match, history }) {
 
                                     <ListGroup.Item className="d-flex justify-content-between">
                                         <span>Status:</span>
-                                        <span>{product.countInStock > 0 ? "In stock" : "Out of stock"}</span>
+                                        <span>
+                                            {product.countInStock > 0 ? "In stock" : "Out of stock"}
+                                        </span>
                                     </ListGroup.Item>
 
                                     {product.countInStock > 0 && (
@@ -63,11 +65,13 @@ function ProductScreen({ match, history }) {
                                                     value={qty}
                                                     onChange={(e) => setQty(e.target.value)}
                                                 >
-                                                    {[...Array(product.countInStock).keys()].map((x) => (
-                                                        <option key={x + 1} value={x + 1}>
-                                                            {x + 1}
-                                                        </option>
-                                                    ))}
+                                                    {[...Array(product.countInStock).keys()].map(
+                                                        (x) => (
+                                                            <option key={x + 1} value={x + 1}>
+                                                                {x + 1}
+                                                            </option>
+                                                        )
+                                                    )}
                                                 </Form.Control>
                                             </span>
                                         </ListGroup.Item>
@@ -78,7 +82,7 @@ function ProductScreen({ match, history }) {
                                             onClick={addToCartHandler}
                                             className="btn-light"
                                             type="button"
-                                            disabled={product.countInStock == 0}
+                                            disabled={product.countInStock === 0}
                                         >
                                             Add to Cart
                                         </Button>

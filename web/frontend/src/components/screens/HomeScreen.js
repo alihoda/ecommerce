@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 
@@ -26,14 +26,7 @@ function HomeScreen() {
             ) : (
                 <Row>
                     {products.map((product) => (
-                        <Col
-                            key={product.id}
-                            sm={12}
-                            md={6}
-                            lg={4}
-                            xl={4}
-                            className="d-flex pb-3"
-                        >
+                        <Col key={product.id} sm={12} md={6} lg={4} xl={4} className="d-flex pb-3">
                             <Product product={product} />
                         </Col>
                     ))}
