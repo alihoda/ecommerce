@@ -23,4 +23,5 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.is_staff
 
     def get_token(self, obj):
-        return str(Token.objects.get(user=obj))
+        token, created = Token.objects.get_or_create(user=obj)
+        return token.key
