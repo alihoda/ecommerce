@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../Loader";
@@ -74,7 +74,7 @@ function LoginScreen({ location, history }) {
                 <Card.Footer>
                     New Customer?{" "}
                     <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-                        Register
+                        Sign Up
                     </Link>
                 </Card.Footer>
             </Card>
