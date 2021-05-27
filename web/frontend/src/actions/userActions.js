@@ -31,12 +31,13 @@ export const login = (username, password) => async (dispatch) => {
         });
         localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
+        console.log(error.message);
         dispatch({
             type: USER_LOGIN_FAIL,
             payload:
                 error.response && error.response.data.message
-                    ? error.response.data.detail
-                    : error.message,
+                    ? error.message
+                    : error.response.data.detail,
         });
     }
 };
