@@ -39,6 +39,7 @@ function Header() {
                                         <NavDropdown.Item>profile</NavDropdown.Item>
                                     </LinkContainer>
 
+                                    <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logoutHandler}>
                                         Logout
                                     </NavDropdown.Item>
