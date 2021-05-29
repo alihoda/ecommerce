@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import Loader from "../Loader";
-import Message from "../Message";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
-import { getUserDetail } from "../../actions/userActions";
+import { getUserDetail } from "../actions/userActions";
 
 function UserProfileScreen({ location, history }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState("");
 
     const dispatch = useDispatch();
 
@@ -38,25 +35,15 @@ function UserProfileScreen({ location, history }) {
         }
     }, [dispatch, history, userInfo, user]);
 
-    const updateHandler = () => {
-        console.log("Go to update page");
-    };
-
     return (
         <Row>
             <Col md={6}>
-                <Row>
-                    <Col md={10}>
-                        <h2>My Info</h2>
-                    </Col>
-                    <Col md={2}>
-                        <Button type="button" variant="light" onClick={() => updateHandler()}>
-                            <i class="fas fa-pen fa-fw"></i>
-                        </Button>
-                    </Col>
-                </Row>
-
+                <h2>My Info</h2>
                 <hr />
+
+                {error && <Message variant="danger">{error}</Message>}
+                {loading && <Loader />}
+
                 <Card border="dark">
                     <Card.Body>
                         <ListGroup variant="flush">
@@ -78,6 +65,17 @@ function UserProfileScreen({ location, history }) {
                                 <Row>
                                     <Col md={5}>Email</Col>
                                     <Col md={7}>{email}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col md={6} className="justify-content-md-center">
+                                        <Link to={"/profile-update"}>Update Profile</Link>
+                                    </Col>
+                                    <Col md={6} className="justify-content-md-center">
+                                        <Link to={"/reset-password"}>Reset Password</Link>
+                                    </Col>
                                 </Row>
                             </ListGroup.Item>
                         </ListGroup>

@@ -6,7 +6,8 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField(read_only=True)
+    name = serializers.SerializerMethodField()
+    username = serializers.CharField(max_length=20)
     isAdmin = serializers.SerializerMethodField(read_only=True)
     token = serializers.SerializerMethodField(read_only=True)
 
@@ -15,11 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'username', 'email', 'isAdmin', 'token']
 
     def get_name(self, obj):
-        name = obj.first_name
-        if not name:
-            name = obj.username
+        return obj.first_name
 
-        return name
+    def get_username(self, obj):
+        return obj.username
 
     def get_isAdmin(self, obj):
         return obj.is_staff

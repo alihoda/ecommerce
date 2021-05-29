@@ -4,15 +4,16 @@ import thunk from "redux-thunk";
 
 import { productListReducer, productDetailReducer } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { userDetailReducer, userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import * as userReducers from "./reducers/userReducers";
 
 const reducer = combineReducers({
     productList: productListReducer,
     productDetail: productDetailReducer,
     cart: cartReducer,
-    userLogin: userLoginReducer,
-    userRegister: userRegisterReducer,
-    userDetail: userDetailReducer,
+    userLogin: userReducers.userLoginReducer,
+    userRegister: userReducers.userRegisterReducer,
+    userDetail: userReducers.userDetailReducer,
+    userUpdateProfile: userReducers.userUpdateProfileReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems");
