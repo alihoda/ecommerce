@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap";
 
-import { listProductDetails } from "../../actions/productActions";
-import Rating from "../Rating";
-import Loader from "../Loader";
-import Message from "../Message";
+import { listProductDetails } from "../actions/productActions";
+import Rating from "../components/Rating";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 function ProductScreen({ match, history }) {
     const [qty, setQty] = useState(1);
