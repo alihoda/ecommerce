@@ -27,3 +27,10 @@ class UserSerializer(serializers.ModelSerializer):
     def get_token(self, obj):
         token, created = Token.objects.get_or_create(user=obj)
         return token.key
+
+
+class PasswordSerializer(serializers.Serializer):
+    model = User
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

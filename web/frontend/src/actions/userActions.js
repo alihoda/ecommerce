@@ -161,3 +161,43 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         });
     }
 };
+
+export const resetPassword = (oldPassword, newPassword) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: consts.RESET_PASSWORD_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Token ${userInfo.token}`,
+            },
+        };
+        const { data } = await axios.put(
+            "/api/users/reset-password/",
+            {
+                old_password: oldPassword,
+                new_password: newPassword,
+            },
+            config
+        );
+
+        dispatch({
+            type: consts.RESET_PASSWORD_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: consts.RESET_PASSWORD_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.message
+                    : error.response.data.detail,
+        });
+    }
+};

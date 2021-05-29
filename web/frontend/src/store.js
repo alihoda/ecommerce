@@ -14,6 +14,7 @@ const reducer = combineReducers({
     userRegister: userReducers.userRegisterReducer,
     userDetail: userReducers.userDetailReducer,
     userUpdateProfile: userReducers.userUpdateProfileReducer,
+    userResetPassword: userReducers.resetPasswordReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems");

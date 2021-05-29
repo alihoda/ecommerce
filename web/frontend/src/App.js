@@ -10,6 +10,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import UserProfileScreen from "./screens/UserProfileScreen";
 import UserProfileUpdateScreen from "./screens/UserProfileUpdateScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/profile" component={UserProfileScreen} />
                     <Route path="/profile-update" component={UserProfileUpdateScreen} />
+                    <Route path="/reset-password" component={ResetPasswordScreen} />
                 </Container>
             </main>
             <Footer />
