@@ -1,6 +1,8 @@
 backend/__pycache__/*
 products/__pycache__/*
 products/migrations/__pycache__/*
+products/urls/__pycache__/*
+products/views/__pycache__/*
 users/__pycache__/*
 users/migrations/__pycache__/*
 static/images/*
