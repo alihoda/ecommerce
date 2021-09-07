@@ -4,9 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Message from "../components/Message";
-import { saveShippingAddress } from "../actions/cartActions";
+import { createOrder } from "../actions/orderActions";
 
-function PlaceOrderScreen() {
+function PlaceOrderScreen({ history }) {
+    const orderCreate = useSelector((state) => state.orderCreate);
+    const { order, error, success } = orderCreate;
+
+    const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
     cart.itemsPrice = cart.cartItems
@@ -14,12 +18,28 @@ function PlaceOrderScreen() {
         .toFixed(2);
     cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2);
     cart.taxPrice = Number(0.082 * cart.itemsPrice).toFixed(2);
-
     cart.totalPrice = Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice);
+
+    useEffect(() => {
+        if (success) {
+            history.push(`/order/${order.id}`);
+        }
+    }, [history, success]);
 
     const placeOrderHandler = (e) => {
         e.preventDefault();
-        console.log("placed");
+
+        dispatch(
+            createOrder({
+                orderItems: cart.cartItems,
+                shippingAddress: cart.shippingAddress,
+                paymentMethod: cart.paymentMethod,
+                itemsPrice: cart.itemsPrice,
+                shippingPrice: cart.shippingPrice,
+                taxPrice: cart.taxPrice,
+                totalPrice: cart.totalPrice,
+            })
+        );
     };
 
     return (
@@ -118,6 +138,12 @@ function PlaceOrderScreen() {
                                 <Col>${cart.totalPrice}</Col>
                             </Row>
                         </ListGroup.Item>
+
+                        {error && (
+                            <ListGroup.Item>
+                                <Message variant="danger">{error}</Message>
+                            </ListGroup.Item>
+                        )}
 
                         <ListGroup.Item className="d-flex flex-column">
                             <Button
